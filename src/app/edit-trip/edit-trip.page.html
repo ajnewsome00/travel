@@ -1,0 +1,571 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>tripAdmin</ion-title>
+    <ion-button shape="round" fill="clear" *ngIf="data.id" slot="end" color="danger" expand="block">Delete</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-accordion-group>
+    <ion-accordion value="zero">
+      <ion-item slot="header" color="light">
+        <ion-label>Details</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item>
+            <ion-input label="Name" placeholder="Enter name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Destination" placeholder="Enter destination"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Dates" placeholder="Enter dates"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Description" placeholder="Enter here"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Estimated Cost" placeholder="Enter Amount"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="RSVP Deadline" placeholder="Enter date"></ion-input>
+          </ion-item>
+          <ion-item-divider>
+            <ion-label> Organizers </ion-label>
+          </ion-item-divider>
+          <ion-searchbar placeholder="Custom Placeholder"></ion-searchbar>
+          <ion-chip>
+            <ion-avatar>
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>ME</ion-label>
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-chip>
+        </ion-list> 
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              
+            </ion-col>
+            <ion-col>
+              <ion-button shape="round" fill="outline" color="medium" expand="block" (click)="goBack()">Cancel</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button shape="round" *ngIf="!data.id" fill="outline" expand="block" (click)="this.data={id:1};">Save</ion-button>
+              <ion-button shape="round" *ngIf="data.id" fill="outline" expand="block">Update</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid> 
+      </div>
+    </ion-accordion>
+    <ion-accordion value="first" [disabled]="!data.id">
+      <ion-item slot="header" color="light">
+        <ion-label>Guests</ion-label>
+        <ion-note color="success" slot="end">
+          ##
+        </ion-note>
+        <ion-note color="warning" slot="end">
+          ##
+        </ion-note>
+        <ion-note color="danger" slot="end">
+          ##
+        </ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item>  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Huey Freeman</ion-label>
+            <ion-note slot="end" color="success">
+              Confirmed
+            </ion-note>
+          </ion-item>
+          <ion-item>  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Mickey Mouse</ion-label>
+            <ion-note slot="end" color="danger">
+              Declined
+            </ion-note>
+          </ion-item>
+          <ion-item>  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Kermit the Frog</ion-label>
+            <ion-note slot="end" color="warning">
+              Tentative
+            </ion-note>
+          </ion-item>
+          <ion-item lines="none">  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Bugs Bunny</ion-label>
+            <ion-note slot="end" color="success">
+              Confirmed
+            </ion-note>
+          </ion-item>
+          <ion-item button lines="none" (click)="goToPage('search/1')">
+            <ion-label color="primary">
+              Invite
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-grid *ngIf="!data.id">
+          <ion-row>
+            <ion-col>
+
+            </ion-col>
+            <ion-col>
+              
+            </ion-col>
+            <ion-col>
+              <ion-button shape="round" fill="outline" expand="block" value="seond">Next</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="second" [disabled]="!data.id">
+      <ion-item slot="header" color="light">
+        <ion-label>Managed Services</ion-label>
+        <ion-note slot="end">
+          $XX Shared / $XX Private
+        </ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Lodging
+            <ion-button fill="clear" slot="end">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-item-divider>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="business" slot="start"></ion-icon>
+            <ion-label button >
+              <h2>Name</h2>
+              <h3>Address</h3>
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="home" slot="start"></ion-icon>
+            <ion-label button >
+              <h2>Name</h2>
+              <h3>Address</h3>
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+          <ion-item-divider>
+            Transportation
+            <ion-button fill="clear" slot="end">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-item-divider>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="car" slot="start"></ion-icon>
+            <ion-label button >
+              <h2>Name</h2>
+              <h3>Address</h3>
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="bus" slot="start"></ion-icon>
+            <ion-label button >
+              <h2>Name</h2>
+              <h3>Address</h3>
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+          <ion-item-divider>
+            Supplies
+            <ion-button fill="clear" slot="end">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-item-divider>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="fast-food" slot="start"></ion-icon>
+            <ion-label button >
+              Groceries
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="bag" slot="start"></ion-icon>
+            <ion-label button >
+              Misc
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+          <ion-item-divider>
+            Services
+            <ion-button fill="clear" slot="end">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-item-divider>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="nutrition" slot="start"></ion-icon>
+            <ion-label button >
+              Chef
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-note slot="start">
+              Date
+            </ion-note>
+            <ion-icon name="musical-notes" slot="start"></ion-icon>
+            <ion-label button >
+              DJ
+            </ion-label>
+            <ion-note slot="end">
+              $$
+            </ion-note>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="third" [disabled]="!data.id">
+      <ion-item slot="header" color="light">
+        <ion-label>Itenerary</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              Suggestions
+            </ion-label>
+            <ion-button fill="clear">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-list-header>
+          <ion-item-divider>
+            Date
+          </ion-item-divider>
+          <ion-item>
+            <ion-note lines="none" slot="start">Time</ion-note>
+            <ion-icon name="boat" slot="start"></ion-icon>
+            <ion-label>
+              Name
+            </ion-label>
+            <ion-button slot="end" color="success"  shape="round">
+              Approve
+            </ion-button>
+            <ion-button slot="end" color="danger"  shape="round">
+              Reject
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-note lines="none" slot="start">Time</ion-note>
+            <ion-icon name="wine" slot="start"></ion-icon>
+            <ion-label>
+              Name
+            </ion-label>
+            <ion-button slot="end" color="success"  shape="round">
+              Approve
+            </ion-button>
+            <ion-button slot="end" color="danger"  shape="round">
+              Reject
+            </ion-button>
+          </ion-item>
+        </ion-list>
+        <ion-list>  
+          <ion-list-header>
+            Confirmed
+          </ion-list-header>
+          <ion-item-divider>
+            Day 1
+          </ion-item-divider>
+          <ion-item button>
+            <ion-note slot="start">
+              Time
+            </ion-note>
+            <ion-label>
+              Event 1 
+            </ion-label>
+            <ion-note color="success" slot="end">
+              ##
+            </ion-note>
+            <ion-note color="warning" slot="end">
+              ##
+            </ion-note>
+            <ion-note color="danger" slot="end">
+              ##
+            </ion-note>
+          </ion-item>
+          <ion-item button lines="none">
+            <ion-note slot="start">
+              Time
+            </ion-note>
+            <ion-label>
+              Event 2 
+            </ion-label>
+            <ion-note color="success" slot="end">
+              ##
+            </ion-note>
+            <ion-note color="warning" slot="end">
+              ##
+            </ion-note>
+            <ion-note color="danger" slot="end">
+              ##
+            </ion-note>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="forth" [disabled]="!data.id">
+      <ion-item slot="header" color="light">
+        <ion-label>Costs</ion-label>
+        <ion-note slot="end">
+          X Outstanding
+        </ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+              <ion-avatar aria-hidden="true" slot="start">
+                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label>Bugs Bunny</ion-label>
+              <ion-note slot="end">
+                $XX Paid / $XX Total
+              </ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  <ion-label>
+                    <h3>Type: Name</h3>
+                    <h2>CashApp : cashtag</h2>
+                  </ion-label>
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <h3>Type: Name</h3>
+                    <h2>Name</h2>
+                  </ion-label>
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="light">
+              <ion-avatar aria-hidden="true" slot="start">
+                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label>Huey Freeman</ion-label>
+              <ion-note slot="end">
+                $XX Paid / $XX Total
+              </ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="light">
+              <ion-avatar aria-hidden="true" slot="start">
+                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label>Kermit the Frog</ion-label>
+              <ion-note slot="end">
+                $XX Paid / $XX Total
+              </ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="forth">
+            <ion-item slot="header" color="light">
+              <ion-avatar aria-hidden="true" slot="start">
+                <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+              <ion-label>Mickey Mouse</ion-label>
+              <ion-note slot="end">
+                $XX Paid / $XX Total
+              </ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item-divider>
+                  Date
+                </ion-item-divider>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        
+      </ion-col>
+      <ion-col>
+        
+      </ion-col>
+      <ion-col>
+        <ion-button shape="round" fill="outline" color="medium" expand="block" (click)="goBack()">Back</ion-button>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

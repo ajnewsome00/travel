@@ -1,0 +1,288 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>trip</ion-title>
+    <ion-button *ngIf="data.id==1" fill="clear" slot="end" (click)="goToPage('editTrip/1')">
+      <ion-label>Manage</ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">trip</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-button expand="full" fill="clear" color="danger" (click)="goBack()">
+    <ion-label>Back</ion-label>
+  </ion-button>
+
+  <ion-card>
+    <ion-item lines="none">
+      <ion-note slot="end">
+        Date
+      </ion-note>
+    </ion-item>
+    <ion-card-header>
+      <ion-card-subtitle>
+        Location
+      </ion-card-subtitle>
+      <ion-card-title>Name</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Here's a small text description for the card content. Nothing more, nothing less.
+      <ion-list-header class="ion-no-padding">
+        <ion-label>
+          Organizers
+        </ion-label>
+      </ion-list-header>
+      <ion-chip [outline]="true" slot="end">
+        <ion-avatar>
+          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+        <ion-label>Huey Freeman</ion-label>
+      </ion-chip>
+      <ion-item class="ion-no-padding" lines="none">
+        <ion-label>
+          <h2>RSVP</h2>
+          <h3>Deadline : Date</h3>
+        </ion-label>
+        <ion-button slot="end" color="success"  *ngIf="(data.id==1)||(data.id==3)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
+          Yes
+        </ion-button>
+        <ion-button slot="end" color="success"   fill="outline" *ngIf="(data.id==2)||(data.id==4)||(data.id==5)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
+          Yes
+        </ion-button>
+        <ion-button slot="end" color="warning" *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==5)" fill="outline" shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
+          Tentative
+        </ion-button>
+        <ion-button slot="end" color="warning" *ngIf="(data.id==4)"  shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
+          Tentative
+        </ion-button>
+        <ion-button slot="end" color="danger" fill="outline" *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==4)" shape="round" (click)="action('respond no'); $event.stopPropagation()">
+          No
+        </ion-button>
+        <ion-button slot="end" color="danger"  *ngIf="(data.id==5)" shape="round" (click)="action('respond no'); $event.stopPropagation()">
+          No
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-accordion-group>
+    <ion-accordion value="first" *ngIf="data.id==1">
+      <ion-item slot="header" color="light">
+        <ion-label>Action Items</ion-label>
+        <ion-note slot="end">4 Inccomplete</ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list class="ion-no-padding"> 
+          <ion-item>
+            Travel
+            <ion-button fill="clear" slot="end">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            Lodging
+            <ion-button fill="clear" slot="end">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-item>  
+          <ion-item>
+            Tickets
+            <ion-item lines="none" slot="end">1 Secured / 4 Total</ion-item>
+          </ion-item>
+          <ion-item lines="none">
+            Total Costs
+            <ion-item lines="none" slot="end">$150 / $600</ion-item>
+          </ion-item>  
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="second" *ngIf="(data.id==1)||(data.id==3)">
+      <ion-item slot="header" color="light">
+        <ion-label>Announcements</ion-label>
+        <ion-note slot="end">3 New</ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item>
+            Announcement 1
+          </ion-item>
+          <ion-item>
+            Announcement 2
+          </ion-item>
+          <ion-item lines="none">
+            Announcement 3
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="third" [disabled]="(data.id==4)||(data.id==5)">
+      <ion-item slot="header" color="light">
+        <ion-label>Guests</ion-label>
+        <ion-note slot="end">4 Confirmed</ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item>  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Huey Freeman</ion-label>
+          </ion-item>
+          <ion-item>  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Mickey Mouse</ion-label>
+          </ion-item>
+          <ion-item>  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Kermit the Frog</ion-label>
+          </ion-item>
+          <ion-item >  
+            <ion-avatar aria-hidden="true" slot="start">
+              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>Bugs Bunny</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="forth">
+      <ion-item slot="header" color="light">
+        <ion-label>Itenerary</ion-label>
+        <ion-note slot="end">4 Events</ion-note>
+        <!--<ion-button fill="clear" slot="end">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>-->
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Day 1
+          </ion-item-divider>
+          <ion-item button (click)="goToPage('event/1')">
+            <ion-note slot="start">
+              Time
+            </ion-note>
+            <ion-label>
+              Event 1 
+            </ion-label>
+            <ion-note slot="end" color="danger">
+              Declined
+            </ion-note>
+          </ion-item>
+          <ion-item button lines="none" (click)="goToPage('event/1')">
+            <ion-note slot="start">
+              Time
+            </ion-note>
+            <ion-label>
+              Event 2 
+            </ion-label>
+            <ion-note slot="end" color="success">
+              Confirmed
+            </ion-note>
+          </ion-item>
+          <ion-item-divider>
+            Day 2
+          </ion-item-divider>
+          <ion-item button (click)="goToPage('event/1')">
+            <ion-note slot="start">
+              Time
+            </ion-note>
+            <ion-label>
+              Event 3 
+            </ion-label>
+            <ion-note slot="end" color="warning">
+              Tentative
+            </ion-note>
+          </ion-item>
+          <ion-item button lines="none" (click)="goToPage('event/1')">
+            <ion-note slot="start">
+              Time
+            </ion-note>
+            <ion-label>
+              Event 4 
+            </ion-label>
+            <ion-note slot="end" color="success">
+              Confirmed
+            </ion-note>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!--<ion-item-group>
+    <ion-item-divider>
+      <ion-label> Guests</ion-label>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-item-divider>
+
+    <ion-item button (click)="goToPage('account')">
+      <ion-avatar aria-hidden="true" slot="start">
+        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>Me: Mickey Mouse</ion-label>
+      <ion-button color="success" fill="outline" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
+        Yes
+      </ion-button>
+      <ion-button color="warning"  shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
+        Tentative
+      </ion-button>
+      <ion-button color="danger" fill="outline" shape="round" (click)="action('respond no'); $event.stopPropagation()">
+        No
+      </ion-button>
+    </ion-item>
+    <ion-item button (click)="goToPage('account')">
+      <ion-avatar aria-hidden="true" slot="start">
+        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>Kermit "the" Frog</ion-label>
+      <ion-label color="success">confirmed</ion-label>
+    </ion-item>
+    <ion-item button (click)="goToPage('account')">
+      <ion-avatar aria-hidden="true" slot="start">
+        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>Bugs Bunny</ion-label>
+      <ion-label color="warning">tentative</ion-label>
+    </ion-item>
+    <ion-item button lines="none" (click)="goToPage('account')">
+      <ion-avatar aria-hidden="true" slot="start">
+        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>Daffy Duck</ion-label>
+      <ion-label color="danger">declined</ion-label>
+    </ion-item>
+  </ion-item-group>-->
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="megaphone"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="goToPage('editEvent')">
+        <ion-icon name="calendar"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="goToPage('search/1')">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  
+  
+
+</ion-content>

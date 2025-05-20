@@ -1,0 +1,231 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>event</ion-title>
+    <ion-button *ngIf="data.id==1" fill="clear" slot="end" (click)="goToPage('editEvent/1')">
+      <ion-label>Edit</ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col> 
+          Type
+        </ion-col>
+        <ion-col class="ion-text-right"> 
+          <ion-note>
+            Ticket Required
+          </ion-note> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-card-header>
+      <!--<ion-card-subtitle>
+        Type
+      </ion-card-subtitle>-->
+      <ion-card-title>Name</ion-card-title>
+      <ion-card-subtitle>Address</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Here's a small text description for the card content. Nothing more, nothing less. <br/><br/>
+
+      Website<br/>
+
+      Contact<br/>
+       -- Phone<br/>
+       -- Email<br/>
+    </ion-card-content>
+    <ion-grid class="ion-text-center">
+      <ion-row>
+        <ion-col> 
+          1 
+          <ion-icon name="person"></ion-icon>
+        </ion-col>
+        <ion-col> 
+          1 
+          <ion-icon name="globe"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item>
+      <ion-label>
+        Trip
+      </ion-label>
+      <ion-note color="success" slot="end">
+        ##
+      </ion-note>
+      <ion-note color="warning" slot="end">
+        ##
+      </ion-note>
+      <ion-note color="danger" slot="end">
+        ##
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>RSVP</h2>
+        <h3>Deadline : Date</h3>
+      </ion-label>
+      <ion-button slot="end" color="success"  *ngIf="(data.id==1)||(data.id==3)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
+        Yes
+      </ion-button>
+      <ion-button slot="end" color="success"   fill="outline" *ngIf="(data.id==2)||(data.id==4)||(data.id==5)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
+        Yes
+      </ion-button>
+      <ion-button slot="end" color="warning" *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==5)" fill="outline" shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
+        Tentative
+      </ion-button>
+      <ion-button slot="end" color="warning" *ngIf="(data.id==4)"  shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
+        Tentative
+      </ion-button>
+      <ion-button slot="end" color="danger" fill="outline" *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==4)" shape="round" (click)="action('respond no'); $event.stopPropagation()">
+        No
+      </ion-button>
+      <ion-button slot="end" color="danger"  *ngIf="(data.id==5)" shape="round" (click)="action('respond no'); $event.stopPropagation()">
+        No
+      </ion-button>
+    </ion-item>
+  </ion-card>
+
+  <ion-accordion-group>
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light">
+        <ion-label>Announcements</ion-label>
+        <ion-note slot="end">3 New</ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item>
+            Announcement 1
+          </ion-item>
+          <ion-item>
+            Announcement 2
+          </ion-item>
+          <ion-item lines="none">
+            Announcement 3
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion *ngIf="(data.id==1)||(data.id==3)">
+      <ion-item slot="header" color="light">
+        <ion-label>Summary</ion-label>
+        <ion-note slot="end">
+          ##
+          <ion-icon name="person"></ion-icon>
+        </ion-note>
+        <ion-note slot="end">
+          $$
+        </ion-note>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-accordion-group>
+          
+          <ion-accordion value="guests">
+            <ion-item slot="header" color="light">
+              <ion-label>Guests</ion-label>
+              <ion-note slot="end">
+                ##
+              </ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item>  
+                  <ion-avatar aria-hidden="true" slot="start">
+                    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  </ion-avatar>
+                  <ion-label>Huey Freeman</ion-label>
+                </ion-item>
+                <ion-item>  
+                  <ion-avatar aria-hidden="true" slot="start">
+                    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  </ion-avatar>
+                  <ion-label>Mickey Mouse</ion-label>
+                </ion-item>
+                <ion-item>  
+                  <ion-avatar aria-hidden="true" slot="start">
+                    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  </ion-avatar>
+                  <ion-label>Kermit the Frog</ion-label>
+                </ion-item>
+                <ion-item >  
+                  <ion-avatar aria-hidden="true" slot="start">
+                    <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  </ion-avatar>
+                  <ion-label>Bugs Bunny</ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="expenses">
+            <ion-item slot="header" color="light">
+              <ion-label>Expenses</ion-label>
+              <ion-note slot="end">$$</ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    <h3>Type: Name</h3>
+                    <h2>CashApp : cashtag</h2>
+                  </ion-label>
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label>
+                    <h3>Type: Name</h3>
+                    <h2>Name</h2>
+                  </ion-label>
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  Type: Name
+                  <ion-note slot="end">
+                    $XX
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group> 
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        
+      </ion-col>
+      <ion-col>
+        
+      </ion-col>
+      <ion-col>
+        <ion-button shape="round" fill="outline" color="medium" expand="block" (click)="goBack()">Back</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--<ion-button expand="full" fill="clear" color="danger">Cancel</ion-button>
+  <ion-button expand="full" fill="clear">Add to Existing Trip</ion-button>
+  <ion-button expand="full" fill="clear">Invite</ion-button>-->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="megaphone"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="goToPage('search/1')">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

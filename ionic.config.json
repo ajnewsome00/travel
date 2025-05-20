@@ -1,0 +1,8 @@
+{
+  "name": "travelDemo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "96062980"
+}

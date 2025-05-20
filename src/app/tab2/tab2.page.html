@@ -1,0 +1,431 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button fill="clear"  slot="start" (click)="goToPage('list/9')">
+      Requests
+    </ion-button>
+    <ion-button fill="clear"  slot="end" (click)="goToPage('list/7')">
+      <ion-icon slot="icon-only" name="mail"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-item-divider>
+    <ion-label>Active : Date</ion-label>
+    <ion-icon slot="end" color="success" name="ellipse"></ion-icon>
+  </ion-item-divider>
+  <ion-accordion-group [value]="['first']">
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>
+          Location - Name
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-accordion-group>
+          <ion-accordion value="announcemetns">
+            <ion-item slot="header" color="light">
+              <ion-label>Announcements</ion-label>
+              <ion-note color="warning" slot="end">3 NEW</ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item-divider>
+                  Day X
+                </ion-item-divider>
+                <ion-item>
+                  <ion-note slot="start">
+                    time
+                  </ion-note>
+                  Message
+                </ion-item>
+                <ion-item>
+                  <ion-note slot="start">
+                    time
+                  </ion-note>
+                  Message
+                </ion-item>
+                <ion-item>
+                  <ion-note slot="start">
+                    time
+                  </ion-note>
+                  Message
+                </ion-item>
+                <ion-item button lines="none">
+                  <ion-label color="primary">
+                    View All
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <ion-accordion-group [value]="['itenerary']">
+          <ion-accordion value="itenerary">
+            <ion-item slot="header" color="light">
+              <ion-label>Itenerary</ion-label>
+              <ion-note slot="end">## Remaining</ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-list>
+                <ion-item-divider>
+                  Date 1
+                </ion-item-divider>
+                <ion-item>
+                  <ion-note slot="start">Time</ion-note>
+                  <ion-icon name="airplane" slot="start"></ion-icon>
+                  <ion-label>
+                    Flight Info
+                  </ion-label>
+                  <ion-note lines="none" slot="end">Destination</ion-note>
+                </ion-item>
+                <ion-item button (click)="goToPage('event/1')">
+                  <ion-note slot="start">Time</ion-note>
+                  My Event
+                </ion-item>
+                <ion-item>
+                  <ion-note slot="start">Time</ion-note>
+                  <ion-icon name="bed" slot="start"></ion-icon>
+                  <ion-label>
+                    Name : Address
+                  </ion-label>
+                  <ion-note lines="none" slot="end">Check-In</ion-note>
+                </ion-item>
+                <ion-item button (click)="goToPage('event/3')">
+                  <ion-note slot="start">Time</ion-note>
+                  Confirmed Event 
+                </ion-item>
+                <ion-item button (click)="goToPage('event/4')">
+                  <ion-note slot="start">Time</ion-note>
+                  Tentative Event
+                </ion-item>
+                <ion-item-divider>
+                  Date 2
+                </ion-item-divider>
+                <ion-item button lines="none" (click)="goToPage('event/5')">
+                  <ion-note slot="start">Time</ion-note>
+                  Declined Event 
+                </ion-item>
+                <ion-item-divider>
+                  Date 3
+                </ion-item-divider>
+                <ion-item>
+                  <ion-note slot="start">Time</ion-note>
+                  <ion-icon name="bed" slot="start"></ion-icon>
+                  <ion-label>
+                    Name : Address
+                  </ion-label>
+                  <ion-note lines="none" slot="end">Check-Out</ion-note>
+                </ion-item>
+                <ion-item button (click)="goToPage('event/2')">
+                  <ion-note slot="start">Time</ion-note>
+                  No RSVP Event
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-note slot="start">Time</ion-note>
+                  <ion-icon name="airplane" slot="start"></ion-icon>
+                  <ion-label>
+                    Fligth Info
+                  </ion-label>
+                  <ion-note lines="none" slot="end">Destination</ion-note>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+        <ion-accordion-group>
+          <ion-accordion>
+            <ion-item slot="header" color="light">
+              <ion-label>Summary</ion-label>
+              <ion-note slot="end">
+                ##
+                <ion-icon name="person"></ion-icon>
+              </ion-note>
+              <ion-note slot="end">
+                $$
+              </ion-note>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-accordion-group>
+          
+                <ion-accordion value="guests">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Guests</ion-label>
+                    <ion-note slot="end">
+                      ##
+                    </ion-note>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">Content</div>
+                </ion-accordion>
+                <ion-accordion value="expenses">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Expenses</ion-label>
+                    <ion-note slot="end">$$</ion-note>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">Content</div>
+                </ion-accordion>
+              </ion-accordion-group>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group> 
+      </div>
+    </ion-accordion>
+
+  </ion-accordion-group>
+
+  <ion-item-divider>
+    <ion-label> Upcoming </ion-label>
+  </ion-item-divider>
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-note slot="start">Date</ion-note>
+        <ion-icon slot="start" name="globe"></ion-icon>
+        <ion-label button >
+          <h2><a href="/tabs/trip/1">My Trip</a></h2> 
+          <h3>Florida</h3>
+        </ion-label>
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" color="warning" name="alert-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Action Items
+          </ion-item-divider>
+          <ion-item>
+            <ion-checkbox>Lodging</ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox>Transportation</ion-checkbox>
+          </ion-item>
+          <ion-item>
+            Tickets
+            <ion-item lines="none" slot="end">- None -</ion-item>
+          </ion-item>
+          <ion-item lines="none">
+            Total Costs
+            <ion-item lines="none" slot="end">- None -</ion-item>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light">
+        <ion-note slot="start">Date</ion-note>
+        <ion-icon slot="start" name="globe"></ion-icon>
+        <ion-label>
+          <h2><a href="/tabs/trip/3">Confirmed Trip</a></h2> 
+          <h3>Turks and Caicos</h3>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Action Items
+          </ion-item-divider>
+          <ion-item>
+            <ion-icon name="bed" slot="start"></ion-icon>
+            <ion-label>
+              Name : Address
+            </ion-label>
+            <ion-item lines="none" slot="end">Check-In Time</ion-item>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="airplane" slot="start"></ion-icon>
+            <ion-label>
+              Flight ##
+            </ion-label>
+            <ion-item lines="none" slot="end">Arrival Time</ion-item>
+          </ion-item>
+          <ion-item>
+            Tickets
+            <ion-item lines="none" slot="end">1 Secured / 4 Total</ion-item>
+          </ion-item>
+          <ion-item lines="none">
+            Total Costs
+            <ion-item lines="none" slot="end">$150 / $600</ion-item>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-note slot="start">Date</ion-note>
+        <ion-icon slot="start" name="globe"></ion-icon>
+        <ion-label>
+          <h2><a href="/tabs/trip/4">Tentative Trip</a></h2> 
+          <h3>NYC</h3>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Action Items
+          </ion-item-divider>
+          <ion-item>
+            <ion-checkbox>Lodging</ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox>Transportation</ion-checkbox>
+          </ion-item>
+          <ion-accordion-group>
+            <ion-accordion value="first">
+              <ion-item slot="header" color="light">
+                <ion-label>Tickets</ion-label>
+                <ion-note lines="none" slot="end">1 Secured / 4 Total</ion-note>
+              </ion-item>
+              <div class="ion-padding" slot="content">
+                <ion-list>
+                  <ion-item-divider>
+                    Day 1
+                  </ion-item-divider>
+                  <ion-item button (click)="goToPage('event/1')">
+                    My Event
+                  </ion-item>
+                  <ion-item button (click)="goToPage('event/3')">
+                    Confirmed Event
+                  </ion-item>
+                  <ion-item-divider (click)="goToPage('event/3')">
+                    Confirmed Event
+                  </ion-item-divider>
+                  <ion-item button (click)="goToPage('event/1')">
+                    My Event
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-accordion>
+            <ion-accordion value="second">
+              <ion-item slot="header" color="light">
+                <ion-label>Total Costs</ion-label>
+                <ion-note lines="none" slot="end">$150 / $600</ion-note>
+              </ion-item>
+              <div class="ion-padding" slot="content">
+                <ion-list>
+                  <ion-item-divider>
+                    Managed Expenses
+                  </ion-item-divider>
+                  <ion-item button>
+                    Caterer
+                    <ion-note slot="end">$$</ion-note>
+                  </ion-item>
+                  <ion-item button>
+                    AirBnb
+                    <ion-note slot="end">$$</ion-note>
+                  </ion-item><ion-item-divider>
+                    Day 1
+                  </ion-item-divider>
+                  <ion-item button (click)="goToPage('event/1')">
+                    My Event
+                    <ion-note slot="end">$$</ion-note>
+                  </ion-item>
+                  <ion-item button (click)="goToPage('event/3')">
+                    Confirmed Event
+                    <ion-note slot="end">$$</ion-note>
+                  </ion-item>
+                  <ion-item-divider>
+                    Day 2
+                  </ion-item-divider>
+                  <ion-item button (click)="goToPage('event/4')">
+                    Tentative Event
+                    <ion-note slot="end">$$</ion-note>
+                  </ion-item>
+                </ion-list>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    
+  
+    <ion-accordion value="forth">
+      <ion-item slot="header" color="light">
+        <ion-note slot="start">Date</ion-note>
+        <ion-icon slot="start" name="calendar"></ion-icon>
+        <ion-label>
+          <h2><a href="/tabs/event/1">My Event</a></h2> 
+          <h3>Raleigh</h3>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Action Items
+          </ion-item-divider>
+          <ion-item>
+            <ion-checkbox>Ticket</ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox>Total Costs</ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="fifth">
+      <ion-item slot="header" color="light">
+        <ion-note slot="start">Date</ion-note>
+        <ion-icon slot="start" name="calendar"></ion-icon>
+        <ion-label>
+          <h2><a href="/tabs/event/3">Confirmed Event</a></h2> 
+          <h3>Raleigh</h3>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Action Items
+          </ion-item-divider>
+          <ion-item>
+            <ion-checkbox checked="true">Ticket</ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox>Total Costs</ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="sixth">
+      <ion-item slot="header" color="light">
+        <ion-note slot="start">Date</ion-note>
+        <ion-icon slot="start" name="calendar"></ion-icon>
+        <ion-label>
+          <h2><a href="/tabs/event/4">Tentative Event</a></h2> 
+          <h3>Raleigh</h3>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <ion-list>
+          <ion-item-divider>
+            Action Items
+          </ion-item-divider>
+          <ion-item>
+            <ion-checkbox>Ticket</ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox>Total Cost</ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="megaphone"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="goToPage('editEvent')">
+        <ion-icon name="calendar"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="goToPage('editTrip')">
+        <ion-icon name="globe"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
