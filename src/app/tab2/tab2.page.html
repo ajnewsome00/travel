@@ -1,38 +1,207 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-button fill="clear"  slot="start" (click)="goToPage('list/9')">
+    <!--<ion-button fill="clear"  slot="start" (click)="goToPage('list/9')">
       Requests
     </ion-button>
     <ion-button fill="clear"  slot="end" (click)="goToPage('list/7')">
       <ion-icon slot="icon-only" name="mail"></ion-icon>
-    </ion-button>
+    </ion-button>-->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!--<div style="height: 100%;">
-    <div style="height: 48%;">
-      <ion-item lines="none">
-        <ion-label>
-          Active
-        </ion-label>
-      </ion-item>
-      <div class="ion-text-center ion-padding">
+  <div>
+    <div>
+      <ion-item-divider lines="none">
+        Active
+      </ion-item-divider>
+      <div class="ion-text-center ion-padding" *ngIf="!current && future">
         <ion-label color="medium">
           ## of Days Until <a>Location/Event Name</a>
         </ion-label>
       </div>
-      <div class="ion-text-center ion-padding">
+      <div class="ion-text-center ion-padding" *ngIf="!current && !future">
         <ion-label color="medium">
           - No Trips or Events Planned - 
         </ion-label>
       </div>
-       
+      <div *ngIf="current">
+        <ion-accordion-group  [value]="['active']">
+          <ion-accordion value="active">
+            <ion-item slot="header" color="light">
+              <ion-label>
+                {{current.name}} : {{current.location}}
+              </ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-accordion-group>
+                <ion-accordion value="announcemetns">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Announcements</ion-label>
+                    <ion-note slot="end">{{current.announcements.length}} New</ion-note>
+                    <ion-button fill="clear" slot="end">
+                      <ion-icon name="add"color="primary"></ion-icon>
+                      <ion-icon name="megaphone"color="primary"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                    <ion-list *ngFor="let item of current.announcements; index as i">
+                      <ion-item-divider *ngIf="(i==0) || (item.startDate!= current.announcements[i-1].startDate)">
+                        {{item.createdDate}}
+                      </ion-item-divider>
+                      <ion-item>
+                        <ion-avatar aria-hidden="true" slot="start">
+                          <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        </ion-avatar>
+                        <ion-label>
+                          <p>{{item.message}}</p>
+                        </ion-label>
+                        <ion-note slot="end">
+                          {{item.time}}
+                        </ion-note>
+                      </ion-item>
+                    </ion-list>
+                    <ion-item button lines="none" *ngIf="current.announcements.length>3">
+                      <ion-label color="primary">
+                        View All
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group>
+              <ion-accordion-group [value]="['itenerary']">
+                <ion-accordion value="itenerary">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Itenerary</ion-label>
+                    <ion-note slot="end"># Remaining</ion-note>
+                    <ion-button fill="clear" slot="end">
+                      <ion-icon name="add"color="primary"></ion-icon>
+                      <ion-icon name="calendar-clear"color="primary"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                    <ion-list  *ngFor="let item of current.itenerary; index as i">
+                      <ion-item-divider *ngIf="(i==0) || (item.date!= current.itenerary[i-1].date)">
+                        {{item.date}}
+                      </ion-item-divider>
+                      <ion-item color="light">
+                        <ion-note slot="start">Time</ion-note>
+                        <ion-icon name="{{item.type}}" slot="start"></ion-icon>
+                        <ion-label>
+                          {{item.name}}
+                        </ion-label>
+                        <ion-note lines="none" slot="end">{{item.description}}</ion-note>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </ion-accordion>
+                
+                <ion-accordion value="expenses">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Expenses</ion-label>
+                    <ion-note slot="end">Info</ion-note>
+                    <ion-button fill="clear" slot="end">
+                      <ion-icon name="add"color="primary"></ion-icon>
+                      <ion-icon name="cash"color="primary"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                    <ion-list *ngFor="let expense of current.expenses">
+                      <ion-item-divider>
+                        {{expense.createdDate}}
+                      </ion-item-divider>
+                      <ion-item button id="event-expense">
+                        {{expense.event.name}}
+                        <ion-note slot="end">{{expense.cost}}</ion-note>
+                      </ion-item>
+                      <ion-popover trigger="event-expense" size="cover" triggerAction="click">
+                        <ng-template>
+                          <ion-content class="ion-padding">
+                            <ion-label class=""ion-padding>
+                              Repayment Details
+                            </ion-label>
+                            <br/>
+                            <ion-item lines="none">
+                              <ion-label>
+                                <h3>Pay</h3>
+                              </ion-label>
+                              <ion-chip slot="end">
+                                <ion-avatar>
+                                  <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                </ion-avatar>
+                                <ion-label>{{expense.buyer.firstName}} {{expense.buyer.lastName}}</ion-label>
+                              </ion-chip>
+                            </ion-item>
+                            
+                            <ion-label class=""ion-padding>
+                              <h3>For</h3>
+                            </ion-label>
+                            <ion-item lines="none">
+                              <ion-label>
+                                  {{expense.name}}
+                              </ion-label>
+                              <ion-note slot="end">
+                                {{expense.cost}}
+                              </ion-note>
+                            </ion-item>
+                            <br/>
+                            <ion-label>
+                              <p>{{expense.description}}</p>
+                            </ion-label>
+                            <ion-grid>
+                              <ion-row>
+                                <ion-col>
+                                  
+                                </ion-col>
+                                <ion-col>
+                                  <ion-button expand="block" shape="round" fill="outline" (click)="expense.paid = true;">
+                                    Pay
+                                  </ion-button>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                          </ion-content>
+                        </ng-template>
+                      </ion-popover>
+                    </ion-list>
+                  </div>
+                </ion-accordion>
+                <ion-accordion value="guests">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Guests</ion-label>
+                    <ion-note slot="end">{{current.guests.length}} New</ion-note>
+                    <ion-button button slot="end" fill="clear">
+                      <ion-label>
+                        Invite
+                      </ion-label>
+                    </ion-button>
+                  </ion-item>
+                  <div class="ion-padding" slot="content">
+                    <ion-list *ngFor="let guest of current.guests">
+                      <ion-item button>
+                        <ion-avatar aria-hidden="true" slot="start">
+                          <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        </ion-avatar>
+                        <ion-label>
+                          {{guest.firstName}} {{guest.lastName}}
+                        </ion-label>
+                        <ion-note slot="end">
+                          {{guest.rsvp}}
+                        </ion-note>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group> 
+      </div> 
     </div>
-    <div style="height: 2%;">
+    <div>  
       <hr style="border-top: 1px solid rgb(152, 154, 162); width: 85%; margin: 10px auto;">
     </div>
-    <div style="height: 48%; display: flex; align-items: center; justify-content: center;">
+    <div style="display: flex; align-items: center; justify-content: center;" *ngIf="!future">
       <ion-button fill="clear" lines="none">
         <ion-icon name="search" size="large"></ion-icon>
       </ion-button>
@@ -45,908 +214,278 @@
         <ion-icon name="add" size="large"></ion-icon>
       </ion-button>
     </div>
-  </div>-->
-
-  <!--<div>
-    <ion-accordion-group [value]="['active']">
-      <ion-accordion value="active">
-        <ion-item slot="header" color="light">
-          <ion-label>
-            Location - Name
-          </ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-accordion-group>
-            <ion-accordion value="announcemetns">
-              <ion-item slot="header" color="light">
-                <ion-label>Announcements</ion-label>
-                <ion-note color="warning" slot="end">3 NEW</ion-note>
-              </ion-item>
-              <div class="ion-padding" slot="content">
-                <ion-list>
-                  <ion-item-divider>
-                    Date
-                  </ion-item-divider>
-                  <ion-item>
-                    <ion-avatar aria-hidden="true" slot="start">
-                      <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                    </ion-avatar>
-                    Message
-                    <ion-note slot="end">
-                      time
-                    </ion-note>
-                  </ion-item>
-                  <ion-item button lines="none">
-                    <ion-label color="primary">
-                      View All
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-accordion>
-          </ion-accordion-group>
-          <ion-accordion-group [value]="['itenerary']">
-            <ion-accordion value="itenerary">
-              <ion-item slot="header" color="light">
-                <ion-label>Itenerary</ion-label>
-                <ion-note slot="end"># Remaining</ion-note>
-              </ion-item>
-              <div class="ion-padding" slot="content">
-                <ion-list>
-                  <ion-item-divider>
-                    Date
-                  </ion-item-divider>
-                  <ion-item color="light">
-                    <ion-note slot="start">Time</ion-note>
-                    <ion-icon name="airplane" slot="start"></ion-icon>
-                    <ion-label>
-                      Flight Info
-                    </ion-label>
-                    <ion-note lines="none" slot="end">Destination</ion-note>
-                  </ion-item>
-                  <ion-item button color="dark">
-                    <ion-note slot="start">Time</ion-note>
-                    <ion-icon *ngIf="" name="flight" slot="start"></ion-icon>
-                    My Event
-                  </ion-item>
-                  <ion-item>
-                    <ion-note slot="start">Time</ion-note>
-                    <ion-icon name="bed" slot="start"></ion-icon>
-                    <ion-label>
-                      Name : Address
-                    </ion-label>
-                    <ion-note lines="none" slot="end">Check-In</ion-note>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-accordion>
-          </ion-accordion-group>
-          <ion-accordion-group>
-            <ion-accordion>
-              <ion-item slot="header" color="light">
-                <ion-label>Summary</ion-label>
-                <ion-note slot="end">
-                  # Confirmed
-                  <ion-icon name="person"></ion-icon>
-                </ion-note>
-                <ion-note slot="end">
-                  # Unpaid
-                </ion-note>
-              </ion-item>
-              <div class="ion-padding" slot="content">
-                <ion-accordion-group>
+    <div *ngIf="future">
+      <ion-item-divider>
+        <ion-label> Upcoming </ion-label>
+      </ion-item-divider>
+      <ion-accordion-group>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-note slot="start">Date</ion-note>
+            <ion-icon slot="start" name="globe"></ion-icon>
+            <ion-label (click)="goToPage('/trip/4')">
+              <a>Event/Trip</a>
+            </ion-label>
             
-                  <ion-accordion value="guests">
-                    <ion-item slot="header" color="light">
-                      <ion-label>Guests</ion-label>
-                    </ion-item>
-                    <div class="ion-padding" slot="content">
-                      <ion-list>
-                        <ion-item button>
-                          <ion-avatar aria-hidden="true" slot="start">
-                            <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                          </ion-avatar>
-                          <ion-label>
-                            Name 2
-                          </ion-label>
-                          <ion-note slot="end">
-                            RSVP Response
-                          </ion-note>
-                        </ion-item>
-                        <ion-item button lines="none" (click)="goToPage('search/1')">
-                          <ion-label color="primary">
-                            Invite
-                          </ion-label>
-                        </ion-item>
-                      </ion-list>
-                    </div>
-                  </ion-accordion>
-                  <ion-accordion value="expenses">
-                    <ion-item slot="header" color="light">
-                      <ion-label>Expenses</ion-label>
-                      <ion-note slot="end" color="danger"># Unpaid</ion-note>
-                    </ion-item>
-                    <div class="ion-padding" slot="content">
-                      <ion-list>
-                        <ion-item-divider>
-                          Day
-                        </ion-item-divider>
-                        <ion-item button id="event-expense">
-                          My Event
-                          <ion-note slot="end">$$</ion-note>
-                        </ion-item>
-                        <ion-popover trigger="event-expense" size="cover" triggerAction="click">
-                          <ng-template>
-                            <ion-content class="ion-padding">
-                              <ion-label class=""ion-padding>
-                                Repayment Details
-                              </ion-label>
-                              <br/>
-                              <ion-item lines="none">
-                                <ion-label>
-                                  <h3>Pay</h3>
-                                </ion-label>
-                                <ion-chip slot="end">
-                                  <ion-avatar>
-                                    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                                  </ion-avatar>
-                                  <ion-label>Name</ion-label>
-                                </ion-chip>
-                              </ion-item>
-                              
-                              <ion-label class=""ion-padding>
-                                <h3>For</h3>
-                              </ion-label>
-                              <ion-item lines="none">
-                                <ion-label>
-                                    Expensed Thing
-                                </ion-label>
-                                <ion-note slot="end">
-                                  $ ##.##
-                                </ion-note>
-                              </ion-item>
-                              <br/>
-                              <ion-label>
-                                <p>Short Message</p>
-                              </ion-label>
-                              <ion-grid>
-                                <ion-row>
-                                  <ion-col>
-                                    
-                                  </ion-col>
-                                  <ion-col>
-                                    <ion-button expand="block" shape="round" fill="outline">
-                                      Pay
-                                    </ion-button>
-                                  </ion-col>
-                                </ion-row>
-                              </ion-grid>
-                            </ion-content>
-                          </ng-template>
-                        </ion-popover>
-                      </ion-list>
-                    </div>
-                  </ion-accordion>
-                </ion-accordion-group>
-              </div>
-            </ion-accordion>
-          </ion-accordion-group> 
-        </div>
-      </ion-accordion>
-    </ion-accordion-group> 
-  </div>-->
-
-  <!--<div>
-    <ion-item-divider>
-      <ion-label> Upcoming </ion-label>
-    </ion-item-divider>
-    <ion-accordion-group [value]="['third']">
-      <ion-accordion value="third">
-        <ion-item slot="header" color="light">
-          <ion-note slot="start">Date</ion-note>
-          <ion-icon slot="start" name="globe"></ion-icon>
-          <ion-label>
-            <h2><a href="/tabs/trip/4">Tentative Trip</a></h2> 
-            <h3>NYC</h3>
-          </ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-accordion-group>
-            <ion-accordion value="guests1">
-              <ion-item slot="header" color="light">
-                <ion-label>Guests</ion-label>
-                <ion-note slot="end">
-                  ##
-                </ion-note>
-              </ion-item>
-              <div class="ion-padding" slot="content">
-                <ion-list>
-                  <ion-item button>
-                    <ion-avatar aria-hidden="true" slot="start">
-                      <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                    </ion-avatar>
-                    <ion-label>
-                      Name 2
-                    </ion-label>
-                    <ion-note slot="end">
-                      RSVP Response
-                    </ion-note>
-                  </ion-item>
-                  <ion-item button lines="none">
-                    <ion-label color="primary">
-                      Invite
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-accordion>
-          </ion-accordion-group>
-          <ion-list>
-            <ion-item-divider>
-              Action Items
-            </ion-item-divider>
-            <ion-item button id="lodging">
-              Lodging
-              <ion-note slot="end">
-                Details
-              </ion-note>
-              <ion-icon slot="end" name="ellipse-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ion-item lines="none">
+              <ion-label>
+                RSVP
+              </ion-label>
+              <ion-button slot="end" shape="round" fill="clear">
+                <ion-label color="success">
+                  Confirm
+                </ion-label>
+              </ion-button>
+              <ion-button slot="end" shape="round" fill="clear">
+                <ion-label color="warning">
+                  Tentative
+                </ion-label>
+              </ion-button>
+              <ion-button slot="end" shape="round" fill="clear">
+                <ion-label color="danger">
+                  Decline
+                </ion-label>
+              </ion-button>
             </ion-item>
-            <ion-popover trigger="lodging" size="cover" triggerAction="click">
-              <ng-template>
-                <ion-content class="ion-padding">   
-                  <ion-list>
-                    <ion-list-header>
-                      Lodging Details
-                    </ion-list-header>
+            <ion-list>
+              <ion-item-divider>
+                Action Items
+              </ion-item-divider>
+              <ion-item button id="lodging">
+                Lodging
+                <ion-note slot="end">
+                  Details
+                </ion-note>
+                <ion-icon slot="end" name="ellipse-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
+              </ion-item>
+              <ion-popover trigger="lodging" size="cover" triggerAction="click">
+                <ng-template>
+                  <ion-content class="ion-padding">   
+                    <ion-list>
+                      <ion-list-header>
+                        Lodging Details
+                      </ion-list-header>
+                      <ion-item>
+                        <ion-select label="Type">
+                          <ion-select-option value="hotel">Hotel</ion-select-option>
+                          <ion-select-option value="home">Home</ion-select-option>
+                          <ion-select-option value="airbnb">AirBnB</ion-select-option>
+                          <ion-select-option value="other">Other</ion-select-option>
+                          <ion-select-option value="none">None</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input label="Name" labelPlacement="floating" placeholder="Enter Name"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input label="Address" labelPlacement="floating" placeholder="Enter Address"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                        <ion-input label="Dates" [disabled]="true" placeholder="placeholder"></ion-input>
+                      </ion-item>
+                    </ion-list>            
+                    <br/>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
+                          
+                        </ion-col>
+                        <ion-col>
+                          <ion-button expand="block" shape="round" fill="outline">
+                            Save
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+              <ion-item button id="transportation">
+                Transportation
+                <ion-note slot="end">
+                  Details
+                </ion-note>
+                <ion-icon slot="end" name="ellipse-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
+              </ion-item>
+              <ion-popover trigger="transportation" size="cover" triggerAction="click">
+                <ng-template>
+                  <ion-content class="ion-padding">
+                    <ion-label class=""ion-padding>
+                      Transportation Details
+                    </ion-label>                
+                    <ion-item-divider>
+                      Departure
+                    </ion-item-divider>
                     <ion-item>
                       <ion-select label="Type">
-                        <ion-select-option value="hotel">Hotel</ion-select-option>
-                        <ion-select-option value="home">Home</ion-select-option>
-                        <ion-select-option value="airbnb">AirBnB</ion-select-option>
+                        <ion-select-option value="flight">Flight</ion-select-option>
+                        <ion-select-option value="car">Car</ion-select-option>
+                        <ion-select-option value="train">Train</ion-select-option>
                         <ion-select-option value="other">Other</ion-select-option>
                         <ion-select-option value="none">None</ion-select-option>
                       </ion-select>
                     </ion-item>
                     <ion-item>
-                      <ion-input label="Name" labelPlacement="floating" placeholder="Enter Name"></ion-input>
+                      <ion-input label="Text input" labelPlacement="floating" placeholder="Name"></ion-input>
                     </ion-item>
                     <ion-item>
-                      <ion-input label="Address" labelPlacement="floating" placeholder="Enter Address"></ion-input>
+                      <ion-input label="Date & Time" [disabled]="true" placeholder="placeholder"></ion-input>
+                    </ion-item>
+                    <ion-item-divider>
+                      Return
+                    </ion-item-divider>
+                    <ion-item>
+                      <ion-select label="Type">
+                        <ion-select-option value="flight">Flight</ion-select-option>
+                        <ion-select-option value="car">Car</ion-select-option>
+                        <ion-select-option value="train">Train</ion-select-option>
+                        <ion-select-option value="other">Other</ion-select-option>
+                        <ion-select-option value="none">None</ion-select-option>
+                      </ion-select>
                     </ion-item>
                     <ion-item>
-                      <ion-input label="Dates" [disabled]="true" placeholder="placeholder"></ion-input>
+                      <ion-input label="Details" labelPlacement="floating" placeholder="Enter Information, ex. Flight Number"></ion-input>
                     </ion-item>
-                  </ion-list>            
-                  <br/>
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col>
-                        
-                      </ion-col>
-                      <ion-col>
-                        <ion-button expand="block" shape="round" fill="outline">
-                          Save
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </ion-content>
-              </ng-template>
-            </ion-popover>
-            <ion-item button id="transportation">
-              Transportation
-              <ion-note slot="end">
-                Details
-              </ion-note>
-              <ion-icon slot="end" name="ellipse-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
-            </ion-item>
-            <ion-popover trigger="transportation" size="cover" triggerAction="click">
-              <ng-template>
-                <ion-content class="ion-padding">
-                  <ion-label class=""ion-padding>
-                    Transportation Details
-                  </ion-label>                
-                  <ion-item-divider>
-                    Departure
-                  </ion-item-divider>
-                  <ion-item>
-                    <ion-select label="Type">
-                      <ion-select-option value="flight">Flight</ion-select-option>
-                      <ion-select-option value="car">Car</ion-select-option>
-                      <ion-select-option value="train">Train</ion-select-option>
-                      <ion-select-option value="other">Other</ion-select-option>
-                      <ion-select-option value="none">None</ion-select-option>
-                    </ion-select>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input label="Text input" labelPlacement="floating" placeholder="Name"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input label="Date & Time" [disabled]="true" placeholder="placeholder"></ion-input>
-                  </ion-item>
-                  <ion-item-divider>
-                    Return
-                  </ion-item-divider>
-                  <ion-item>
-                    <ion-select label="Type">
-                      <ion-select-option value="flight">Flight</ion-select-option>
-                      <ion-select-option value="car">Car</ion-select-option>
-                      <ion-select-option value="train">Train</ion-select-option>
-                      <ion-select-option value="other">Other</ion-select-option>
-                      <ion-select-option value="none">None</ion-select-option>
-                    </ion-select>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input label="Details" labelPlacement="floating" placeholder="Enter Information, ex. Flight Number"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-input label="Date & Time" [disabled]="true" placeholder="placeholder"></ion-input>
-                  </ion-item>
-                  <br/>
-                  <ion-grid>
-                    <ion-row>
-                      <ion-col>
-                        
-                      </ion-col>
-                      <ion-col>
-                        <ion-button expand="block" shape="round" fill="outline">
-                          Save
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-grid>
-                </ion-content>
-              </ng-template>
-            </ion-popover>
-            <ion-accordion-group>
-              <ion-accordion value="first">
-                <ion-item slot="header" color="light">
-                  <ion-label>Tickets</ion-label>
-                  <ion-icon slot="end" name="alert-circle" color="warning"></ion-icon>
-                  <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
-                </ion-item>
-                <div class="ion-padding" slot="content">
-                  <ion-list>
-                    <ion-item-divider>
-                      Day 1
-                    </ion-item-divider>
-                    <ion-item button id="ticket">
-                      Event
+                    <ion-item>
+                      <ion-input label="Date & Time" [disabled]="true" placeholder="placeholder"></ion-input>
                     </ion-item>
-                    <ion-popover trigger="ticket" size="cover" triggerAction="click">
-                      <ng-template>
-                        <ion-content class="ion-padding">
-                          <ion-label class=""ion-padding>
-                            Ticket Details
-                          </ion-label>                
+                    <br/>
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col>
                           
-                          <ion-item lines="none">
-                            <ion-label>
-                                <a>
-                                  Purchase Location
-                                </a>
-                            </ion-label>
-                            <ion-note slot="end">
-                              $ ##.##
-                            </ion-note>
-                          </ion-item>
-                          <br/>
-                          <ion-label>
-                            <p>Short Message</p>
-                          </ion-label>
-                          <ion-grid>
-                            <ion-row>
-                              <ion-col>
-                                
-                              </ion-col>
-                              <ion-col>
-                                <ion-button expand="block" shape="round" fill="outline">
-                                  Secured
-                                </ion-button>
-                              </ion-col>
-                            </ion-row>
-                          </ion-grid>
-                        </ion-content>
-                      </ng-template>
-                    </ion-popover>
-                  </ion-list>
-                </div>
-              </ion-accordion>
-              <ion-accordion value="second">
-                <ion-item slot="header" color="light">
-                  <ion-label>Total Costs</ion-label>
-                  <ion-icon slot="end" name="alert-circle" color="warning"></ion-icon>
-                  <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
-                </ion-item>
-                <div class="ion-padding" slot="content">
-                  <ion-list>
-                    <ion-item lines="none">
-                      Total : $$
-                      <ion-note slot="end" color="warning"> $$ Remaining</ion-note>
-                    </ion-item>
-                    <ion-item-divider>
-                      Day
-                    </ion-item-divider>
-                    <ion-item button id="expense">
-                      Event
-                      <ion-note slot="end">$$</ion-note>
-                    </ion-item>
-                    <ion-popover trigger="expense" size="cover" triggerAction="click">
-                      <ng-template>
-                        <ion-content class="ion-padding">
-                          <ion-label class=""ion-padding>
-                            Repayment Details
-                          </ion-label>
-                          <br/>
-                          <ion-item lines="none">
-                            <ion-label>
-                              <h3>Pay</h3>
-                            </ion-label>
-                            <ion-chip slot="end">
-                              <ion-avatar>
-                                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                              </ion-avatar>
-                              <ion-label>Name</ion-label>
-                            </ion-chip>
-                          </ion-item>
-                          
-                          <ion-label class=""ion-padding>
-                            <h3>For</h3>
-                          </ion-label>
-                          <ion-item lines="none">
-                            <ion-label>
-                                Expensed Thing
-                            </ion-label>
-                            <ion-note slot="end">
-                              $ ##.##
-                            </ion-note>
-                          </ion-item>
-                          <br/>
-                          <ion-label>
-                            <p>Short Message</p>
-                          </ion-label>
-                          <ion-grid>
-                            <ion-row>
-                              <ion-col>
-                                
-                              </ion-col>
-                              <ion-col>
-                                <ion-button expand="block" shape="round" fill="outline">
-                                  Pay
-                                </ion-button>
-                              </ion-col>
-                            </ion-row>
-                          </ion-grid>
-                        </ion-content>
-                      </ng-template>
-                    </ion-popover>
-                  </ion-list>
-                </div>
-              </ion-accordion>
-            </ion-accordion-group>
-          </ion-list>
-        </div>
-      </ion-accordion>
-    </ion-accordion-group>
-  </div>-->
-  <ion-item-divider>
-    <ion-label>Active : Date</ion-label>
-    <ion-icon slot="end" color="success" name="ellipse"></ion-icon>
-  </ion-item-divider>
-  <ion-accordion-group [value]="['first']">
-    <ion-accordion value="first">
-      <ion-item slot="header" color="light">
-        <ion-label>
-          Location - Name
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-accordion-group>
-          <ion-accordion value="announcemetns">
-            <ion-item slot="header" color="light">
-              <ion-label>Announcements</ion-label>
-              <ion-note color="warning" slot="end">3 NEW</ion-note>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-              <ion-list>
-                <ion-item-divider>
-                  Day X
-                </ion-item-divider>
-                <ion-item>
-                  <ion-note slot="start">
-                    time
-                  </ion-note>
-                  Message
-                </ion-item>
-                <ion-item>
-                  <ion-note slot="start">
-                    time
-                  </ion-note>
-                  Message
-                </ion-item>
-                <ion-item>
-                  <ion-note slot="start">
-                    time
-                  </ion-note>
-                  Message
-                </ion-item>
-                <ion-item button lines="none">
-                  <ion-label color="primary">
-                    View All
-                  </ion-label>
-                </ion-item>
-              </ion-list>
-            </div>
-          </ion-accordion>
-        </ion-accordion-group>
-        <ion-accordion-group [value]="['itenerary']">
-          <ion-accordion value="itenerary">
-            <ion-item slot="header" color="light">
-              <ion-label>Itenerary</ion-label>
-              <ion-note slot="end">## Remaining</ion-note>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-              <ion-list>
-                <ion-item-divider>
-                  Date 1
-                </ion-item-divider>
-                <ion-item>
-                  <ion-note slot="start">Time</ion-note>
-                  <ion-icon name="airplane" slot="start"></ion-icon>
-                  <ion-label>
-                    Flight Info
-                  </ion-label>
-                  <ion-note lines="none" slot="end">Destination</ion-note>
-                </ion-item>
-                <ion-item button (click)="goToPage('event/1')">
-                  <ion-note slot="start">Time</ion-note>
-                  My Event
-                </ion-item>
-                <ion-item>
-                  <ion-note slot="start">Time</ion-note>
-                  <ion-icon name="bed" slot="start"></ion-icon>
-                  <ion-label>
-                    Name : Address
-                  </ion-label>
-                  <ion-note lines="none" slot="end">Check-In</ion-note>
-                </ion-item>
-                <ion-item button (click)="goToPage('event/3')">
-                  <ion-note slot="start">Time</ion-note>
-                  Confirmed Event 
-                </ion-item>
-                <ion-item button (click)="goToPage('event/4')">
-                  <ion-note slot="start">Time</ion-note>
-                  Tentative Event
-                </ion-item>
-                <ion-item-divider>
-                  Date 2
-                </ion-item-divider>
-                <ion-item button lines="none" (click)="goToPage('event/5')">
-                  <ion-note slot="start">Time</ion-note>
-                  Declined Event 
-                </ion-item>
-                <ion-item-divider>
-                  Date 3
-                </ion-item-divider>
-                <ion-item>
-                  <ion-note slot="start">Time</ion-note>
-                  <ion-icon name="bed" slot="start"></ion-icon>
-                  <ion-label>
-                    Name : Address
-                  </ion-label>
-                  <ion-note lines="none" slot="end">Check-Out</ion-note>
-                </ion-item>
-                <ion-item button (click)="goToPage('event/2')">
-                  <ion-note slot="start">Time</ion-note>
-                  No RSVP Event
-                </ion-item>
-                <ion-item lines="none">
-                  <ion-note slot="start">Time</ion-note>
-                  <ion-icon name="airplane" slot="start"></ion-icon>
-                  <ion-label>
-                    Fligth Info
-                  </ion-label>
-                  <ion-note lines="none" slot="end">Destination</ion-note>
-                </ion-item>
-              </ion-list>
-            </div>
-          </ion-accordion>
-        </ion-accordion-group>
-        <ion-accordion-group>
-          <ion-accordion>
-            <ion-item slot="header" color="light">
-              <ion-label>Summary</ion-label>
-              <ion-note slot="end">
-                ##
-                <ion-icon name="person"></ion-icon>
-              </ion-note>
-              <ion-note slot="end">
-                $$
-              </ion-note>
-            </ion-item>
-            <div class="ion-padding" slot="content">
+                        </ion-col>
+                        <ion-col>
+                          <ion-button expand="block" shape="round" fill="outline">
+                            Save
+                          </ion-button>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
               <ion-accordion-group>
-          
-                <ion-accordion value="guests">
-                  <ion-item slot="header" color="light">
-                    <ion-label>Guests</ion-label>
-                    <ion-note slot="end">
-                      ##
-                    </ion-note>
-                  </ion-item>
-                  <div class="ion-padding" slot="content">Content</div>
-                </ion-accordion>
-                <ion-accordion value="expenses">
+                <ion-accordion value="first">
                   <ion-item slot="header" color="light">
                     <ion-label>Expenses</ion-label>
-                    <ion-note slot="end">$$</ion-note>
+                    <ion-icon slot="end" name="alert-circle" color="warning"></ion-icon>
+                    <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
                   </ion-item>
-                  <div class="ion-padding" slot="content">Content</div>
+                  <div class="ion-padding" slot="content">
+                    <ion-list>
+                      <ion-item-divider>
+                        Day 1
+                      </ion-item-divider>
+                      <ion-item button id="ticket">
+                        Event
+                        <ion-note slot="end">
+                          Item
+                        </ion-note>
+                        <ion-icon slot="end" color="warning" name="ticket"></ion-icon>
+                        <ion-icon slot="end" color="warning" name="cash"></ion-icon>
+                        <ion-icon slot="end" color="success" name="ticket"></ion-icon>
+                        <ion-icon slot="end" color="success" name="cash"></ion-icon>
+                      </ion-item>
+                      <!--<ion-popover trigger="ticket" size="cover" triggerAction="click">
+                        <ng-template>
+                          <ion-content class="ion-padding" *ngIf="true">
+                            <ion-label class=""ion-padding>
+                              Ticket Details
+                            </ion-label>                
+                            
+                            <ion-item lines="none">
+                              <ion-label>
+                                  <a>
+                                    Purchase Location
+                                  </a>
+                              </ion-label>
+                              <ion-note slot="end">
+                                $ ##.##
+                              </ion-note>
+                            </ion-item>
+                            <br/>
+                            <ion-label>
+                              <p>Short Message</p>
+                            </ion-label>
+                            <ion-grid>
+                              <ion-row>
+                                <ion-col>
+                                  
+                                </ion-col>
+                                <ion-col>
+                                  <ion-button expand="block" shape="round" fill="outline">
+                                    Secured
+                                  </ion-button>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                          </ion-content>
+                          <ion-content class="ion-padding" *ngIf="true">
+                            <ion-label class=""ion-padding>
+                              Repayment Details
+                            </ion-label>
+                            <br/>
+                            <ion-item lines="none">
+                              <ion-label>
+                                <h3>Pay</h3>
+                              </ion-label>
+                              <ion-chip slot="end">
+                                <ion-avatar>
+                                  <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                                </ion-avatar>
+                                <ion-label>Name</ion-label>
+                              </ion-chip>
+                            </ion-item>
+                            
+                            <ion-label class=""ion-padding>
+                              <h3>For</h3>
+                            </ion-label>
+                            <ion-item lines="none">
+                              <ion-label>
+                                  Expensed Thing
+                              </ion-label>
+                              <ion-note slot="end">
+                                $ ##.##
+                              </ion-note>
+                            </ion-item>
+                            <br/>
+                            <ion-label>
+                              <p>Short Message</p>
+                            </ion-label>
+                            <ion-grid>
+                              <ion-row>
+                                <ion-col>
+                                  
+                                </ion-col>
+                                <ion-col>
+                                  <ion-button expand="block" shape="round" fill="outline">
+                                    Pay
+                                  </ion-button>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                          </ion-content>
+                        </ng-template>
+                      </ion-popover>-->
+                    </ion-list>
+                  </div>
                 </ion-accordion>
+                <ion-item>
+                  Guests
+                  <ion-button slot="end" shape="round" fill="clear">
+                    Invite
+                  </ion-button>
+                </ion-item>
               </ion-accordion-group>
-            </div>
-          </ion-accordion>
-        </ion-accordion-group> 
-      </div>
-    </ion-accordion>
-
-  </ion-accordion-group>
-
-  <ion-item-divider>
-    <ion-label> Upcoming </ion-label>
-  </ion-item-divider>
-  <ion-accordion-group>
-    <ion-accordion value="first">
-      <ion-item slot="header" color="light">
-        <ion-note slot="start">Date</ion-note>
-        <ion-icon slot="start" name="globe"></ion-icon>
-        <ion-label button >
-          <h2><a href="/tabs/trip/1">My Trip</a></h2> 
-          <h3>Florida</h3>
-        </ion-label>
-        <ion-button fill="clear">
-          <ion-icon slot="icon-only" color="warning" name="alert-circle"></ion-icon>
-        </ion-button>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-list>
-          <ion-item-divider>
-            Action Items
-          </ion-item-divider>
-          <ion-item>
-            <ion-checkbox>Lodging</ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-checkbox>Transportation</ion-checkbox>
-          </ion-item>
-          <ion-item>
-            Tickets
-            <ion-item lines="none" slot="end">- None -</ion-item>
-          </ion-item>
-          <ion-item lines="none">
-            Total Costs
-            <ion-item lines="none" slot="end">- None -</ion-item>
-          </ion-item>
-        </ion-list>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="second">
-      <ion-item slot="header" color="light">
-        <ion-note slot="start">Date</ion-note>
-        <ion-icon slot="start" name="globe"></ion-icon>
-        <ion-label>
-          <h2><a href="/tabs/trip/3">Confirmed Trip</a></h2> 
-          <h3>Turks and Caicos</h3>
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-list>
-          <ion-item-divider>
-            Action Items
-          </ion-item-divider>
-          <ion-item>
-            <ion-icon name="bed" slot="start"></ion-icon>
-            <ion-label>
-              Name : Address
-            </ion-label>
-            <ion-item lines="none" slot="end">Check-In Time</ion-item>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="airplane" slot="start"></ion-icon>
-            <ion-label>
-              Flight ##
-            </ion-label>
-            <ion-item lines="none" slot="end">Arrival Time</ion-item>
-          </ion-item>
-          <ion-item>
-            Tickets
-            <ion-item lines="none" slot="end">1 Secured / 4 Total</ion-item>
-          </ion-item>
-          <ion-item lines="none">
-            Total Costs
-            <ion-item lines="none" slot="end">$150 / $600</ion-item>
-          </ion-item>
-        </ion-list>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="third">
-      <ion-item slot="header" color="light">
-        <ion-note slot="start">Date</ion-note>
-        <ion-icon slot="start" name="globe"></ion-icon>
-        <ion-label>
-          <h2><a href="/tabs/trip/4">Tentative Trip</a></h2> 
-          <h3>NYC</h3>
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-list>
-          <ion-item-divider>
-            Action Items
-          </ion-item-divider>
-          <ion-item>
-            <ion-checkbox>Lodging</ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-checkbox>Transportation</ion-checkbox>
-          </ion-item>
-          <ion-accordion-group>
-            <ion-accordion value="first">
-              <ion-item slot="header" color="light">
-                <ion-label>Tickets</ion-label>
-                <ion-note lines="none" slot="end">1 Secured / 4 Total</ion-note>
-              </ion-item>
-              <div class="ion-padding" slot="content">
-                <ion-list>
-                  <ion-item-divider>
-                    Day 1
-                  </ion-item-divider>
-                  <ion-item button (click)="goToPage('event/1')">
-                    My Event
-                  </ion-item>
-                  <ion-item button (click)="goToPage('event/3')">
-                    Confirmed Event
-                  </ion-item>
-                  <ion-item-divider (click)="goToPage('event/3')">
-                    Confirmed Event
-                  </ion-item-divider>
-                  <ion-item button (click)="goToPage('event/1')">
-                    My Event
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-accordion>
-            <ion-accordion value="second">
-              <ion-item slot="header" color="light">
-                <ion-label>Total Costs</ion-label>
-                <ion-note lines="none" slot="end">$150 / $600</ion-note>
-              </ion-item>
-              <div class="ion-padding" slot="content">
-                <ion-list>
-                  <ion-item-divider>
-                    Managed Expenses
-                  </ion-item-divider>
-                  <ion-item button>
-                    Caterer
-                    <ion-note slot="end">$$</ion-note>
-                  </ion-item>
-                  <ion-item button>
-                    AirBnb
-                    <ion-note slot="end">$$</ion-note>
-                  </ion-item><ion-item-divider>
-                    Day 1
-                  </ion-item-divider>
-                  <ion-item button (click)="goToPage('event/1')">
-                    My Event
-                    <ion-note slot="end">$$</ion-note>
-                  </ion-item>
-                  <ion-item button (click)="goToPage('event/3')">
-                    Confirmed Event
-                    <ion-note slot="end">$$</ion-note>
-                  </ion-item>
-                  <ion-item-divider>
-                    Day 2
-                  </ion-item-divider>
-                  <ion-item button (click)="goToPage('event/4')">
-                    Tentative Event
-                    <ion-note slot="end">$$</ion-note>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </ion-accordion>
-          </ion-accordion-group>
-        </ion-list>
-      </div>
-    </ion-accordion>
-    
-  
-    <ion-accordion value="forth">
-      <ion-item slot="header" color="light">
-        <ion-note slot="start">Date</ion-note>
-        <ion-icon slot="start" name="calendar"></ion-icon>
-        <ion-label>
-          <h2><a href="/tabs/event/1">My Event</a></h2> 
-          <h3>Raleigh</h3>
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-list>
-          <ion-item-divider>
-            Action Items
-          </ion-item-divider>
-          <ion-item>
-            <ion-checkbox>Ticket</ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-checkbox>Total Costs</ion-checkbox>
-          </ion-item>
-        </ion-list>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="fifth">
-      <ion-item slot="header" color="light">
-        <ion-note slot="start">Date</ion-note>
-        <ion-icon slot="start" name="calendar"></ion-icon>
-        <ion-label>
-          <h2><a href="/tabs/event/3">Confirmed Event</a></h2> 
-          <h3>Raleigh</h3>
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-list>
-          <ion-item-divider>
-            Action Items
-          </ion-item-divider>
-          <ion-item>
-            <ion-checkbox checked="true">Ticket</ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-checkbox>Total Costs</ion-checkbox>
-          </ion-item>
-        </ion-list>
-      </div>
-    </ion-accordion>
-    <ion-accordion value="sixth">
-      <ion-item slot="header" color="light">
-        <ion-note slot="start">Date</ion-note>
-        <ion-icon slot="start" name="calendar"></ion-icon>
-        <ion-label>
-          <h2><a href="/tabs/event/4">Tentative Event</a></h2> 
-          <h3>Raleigh</h3>
-        </ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-list>
-          <ion-item-divider>
-            Action Items
-          </ion-item-divider>
-          <ion-item>
-            <ion-checkbox>Ticket</ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-checkbox>Total Cost</ion-checkbox>
-          </ion-item>
-        </ion-list>
-      </div>
-    </ion-accordion>
-  </ion-accordion-group>
-
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button>
-        <ion-icon name="megaphone"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button (click)="goToPage('editEvent')">
-        <ion-icon name="calendar"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button (click)="goToPage('editTrip')">
-        <ion-icon name="globe"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+            </ion-list>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </div>
+  </div>
 </ion-content>

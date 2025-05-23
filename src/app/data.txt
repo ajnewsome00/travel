@@ -1,0 +1,129 @@
+
+// person
+[{
+  "id": 1,
+  "firstName": "Caroljean",
+  "lastName": "Simmig",
+  "email": "csimmig0@salon.com",
+  "gender": "Genderqueer",
+  "phone": "673 313 3331",
+  "createdDate": "8/17/2024",
+  "lastActive": "2/7/2025",
+  "dietary": 88,
+  "medical": 20
+}]
+
+
+//trips
+[{
+  "id": 1,
+  "name": "Beiwenquan",
+  "location": "035 Village Green Crossing",
+  "startDate": "3/4/2025",
+  "endDate": "11/22/2024",
+  "description": "Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.",
+  "guests": [
+
+  ],
+  "announcements": [
+
+  ],
+  "expenses": [
+
+  ],
+  "tickets": [
+
+  ],
+  "managedServices": [
+
+  ],
+  "organizer": [
+
+  ],
+  "rsvp": "09/15/2024"
+}]
+
+//event
+[{
+  "id": 1,
+  "name": "Biodex",
+  "location": "14639 Steensland Way",
+  "startDate": "3/12/2025",
+  "startTime": "0:47",
+  "description": "Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
+  "guests": [
+
+  ],
+  "announcements": [
+
+  ],
+  "expenses": [
+
+  ],
+  "organizer": [
+
+  ],
+  "rsvp": "08/22/2024",
+  "type": [
+
+  ]
+}]
+
+//groups
+[{
+  "id": 1,
+  "name": "Fritsch-Wolf",
+  "createdDate": "12/31/2024",
+  "lastActive": "3/18/2025",
+  "description": "Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna.",
+  "members": [
+
+  ],
+  "organizer": [
+
+  ],
+  "trips": [
+
+  ]
+}]
+
+//expenses
+[{
+  "id": 1,
+  "name": "Travel Beach Blanket",
+  "createdDate": "8/28/2024",
+  "cost": "$25.02",
+  "description": "Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.",
+  "buyer": [
+
+  ],
+  "repayers": [
+
+  ],
+  "trip": [
+
+  ],
+  "event": [
+
+  ],
+  "creator": [
+
+  ]
+}]
+
+//announcements
+[{
+  "id": 1,
+  "created date": "1/24/2025",
+  "time": "17:44",
+  "message": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.",
+  "trip": [
+
+  ],
+  "event": [
+
+  ],
+  "creator": [
+
+  ]
+}]
