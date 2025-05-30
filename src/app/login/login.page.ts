@@ -19,4 +19,13 @@ export class LoginPage implements OnInit {
     //console.log(" Button Pushed");
   }
 
+  createAccount() {
+    this.router.navigate(['/editAccount']);
+    //console.log(" Button Pushed");
+  }
+
+  signIn(){
+    
+  }  
+
 }

@@ -1,6 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>trip</ion-title>
     <ion-button *ngIf="data.id==1" fill="clear" slot="end" (click)="goToPage('editTrip/1')">
       <ion-label>Manage</ion-label>
     </ion-button>
@@ -14,63 +13,74 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button expand="full" fill="clear" color="danger" (click)="goBack()">
-    <ion-label>Back</ion-label>
-  </ion-button>
-
   <ion-card>
-    <ion-item lines="none">
-      <ion-note slot="end">
-        Date
-      </ion-note>
-    </ion-item>
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col> 
+          Date Range 
+        </ion-col>
+        <ion-col class="ion-text-right"> 
+          <ion-note>
+            Private
+          </ion-note> 
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-grid>
       <ion-row class="ion-justify-content-center">
             <img alt="Mountains" src="data:image/jpeg;base64,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">
       </ion-row>
     </ion-grid>
     <ion-card-header>
-      <ion-card-subtitle>
-        Location
-      </ion-card-subtitle>
-      <ion-card-title>Name</ion-card-title>
+      <ion-card-title>Trip Name</ion-card-title>
+      <ion-card-subtitle>Location</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-      <ion-list-header class="ion-no-padding">
-        <ion-label>
-          Organizers
-        </ion-label>
-      </ion-list-header>
-      <ion-chip [outline]="true" slot="end">
-        <ion-avatar>
-          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
-        <ion-label>Huey Freeman</ion-label>
-      </ion-chip>
+      Trip Description
+      <ion-item class="ion-no-padding" lines="full"> 
+        Organizer
+        <ion-chip [outline]="true" slot="end">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>Organizer Name</ion-label>
+        </ion-chip>
+      </ion-item>
       <ion-item class="ion-no-padding" lines="none">
         <ion-label>
           <h2>RSVP</h2>
           <h3>Deadline : Date</h3>
         </ion-label>
-        <ion-button slot="end" color="success"  *ngIf="(data.id==1)||(data.id==3)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
-          Yes
+        <ion-button slot="end"  color="success"  *ngIf="(data.id==1)||(data.id==3)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
+          <ion-label>
+            Yes
+          </ion-label>
         </ion-button>
-        <ion-button slot="end" color="success"   fill="outline" *ngIf="(data.id==2)||(data.id==4)||(data.id==5)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
-          Yes
+        <ion-button slot="end"  fill="outline" color="medium" *ngIf="(data.id==2)||(data.id==4)||(data.id==5)" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
+          <ion-label color="success" >
+            Yes
+          </ion-label>
         </ion-button>
-        <ion-button slot="end" color="warning" *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==5)" fill="outline" shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
-          Tentative
+        <ion-button slot="end" color="medium" fill="outline" *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==5)" fill="outline" shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
+          <ion-label color="warning">
+            Tentative
+          </ion-label>
         </ion-button>
         <ion-button slot="end" color="warning" *ngIf="(data.id==4)"  shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
-          Tentative
+          <ion-label>
+            Tentative
+          </ion-label>
         </ion-button>
-        <ion-button slot="end" color="danger" fill="outline" *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==4)" shape="round" (click)="action('respond no'); $event.stopPropagation()">
-          No
+        <ion-button slot="end"  color="medium" fill="outline"  *ngIf="(data.id==1)||(data.id==2)||(data.id==3)||(data.id==4)" shape="round" (click)="action('respond no'); $event.stopPropagation()">
+          <ion-label color="danger">
+            No
+          </ion-label>
         </ion-button>
         <ion-button slot="end" color="danger"  *ngIf="(data.id==5)" shape="round" (click)="action('respond no'); $event.stopPropagation()">
-          No
+         <ion-label>
+            No
+          </ion-label> 
         </ion-button>
       </ion-item>
     </ion-card-content>
@@ -84,52 +94,172 @@
       </ion-item>
       <div class="ion-padding" slot="content">
         <ion-list class="ion-no-padding"> 
-          <ion-item>
-            Travel
-            <ion-button fill="clear" slot="end">
-              <ion-icon slot="icon-only" name="add"></ion-icon>
-            </ion-button>
-          </ion-item>
-          <ion-item>
+          <ion-item button id="lodging">
             Lodging
-            <ion-button fill="clear" slot="end">
-              <ion-icon slot="icon-only" name="add"></ion-icon>
-            </ion-button>
-          </ion-item>  
-          <ion-item>
-            Tickets
-            <ion-item lines="none" slot="end">1 Secured / 4 Total</ion-item>
+            <ion-note slot="end">
+              Details
+            </ion-note>
+            <ion-icon slot="end" name="ellipse-outline"></ion-icon>
+            <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
           </ion-item>
-          <ion-item lines="none">
-            Total Costs
-            <ion-item lines="none" slot="end">$150 / $600</ion-item>
-          </ion-item>  
+          <ion-popover trigger="lodging" size="cover" triggerAction="click">
+            <ng-template>
+              <ion-content class="ion-padding">   
+                <ion-list>
+                  <ion-list-header>
+                    Lodging Details
+                  </ion-list-header>
+                  <ion-item>
+                    <ion-select label="Type">
+                      <ion-select-option value="hotel">Hotel</ion-select-option>
+                      <ion-select-option value="home">Home</ion-select-option>
+                      <ion-select-option value="airbnb">AirBnB</ion-select-option>
+                      <ion-select-option value="other">Other</ion-select-option>
+                      <ion-select-option value="none">None</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Name" labelPlacement="floating" placeholder="Enter Name"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Address" labelPlacement="floating" placeholder="Enter Address"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Dates" [disabled]="true" placeholder="placeholder"></ion-input>
+                  </ion-item>
+                </ion-list>            
+                <br/>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      
+                    </ion-col>
+                    <ion-col>
+                      <ion-button expand="block" shape="round" fill="outline">
+                        Save
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+          <ion-item button id="transportation">
+            Transportation
+            <ion-note slot="end">
+              Details
+            </ion-note>
+            <ion-icon slot="end" name="ellipse-outline"></ion-icon>
+            <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
+          </ion-item>
+          <ion-popover trigger="transportation" size="cover" triggerAction="click">
+            <ng-template>
+              <ion-content class="ion-padding">
+                <ion-label class=""ion-padding>
+                  Transportation Details
+                </ion-label>                
+                <ion-item-divider>
+                  Departure
+                </ion-item-divider>
+                <ion-item>
+                  <ion-select label="Type">
+                    <ion-select-option value="flight">Flight</ion-select-option>
+                    <ion-select-option value="car">Car</ion-select-option>
+                    <ion-select-option value="train">Train</ion-select-option>
+                    <ion-select-option value="other">Other</ion-select-option>
+                    <ion-select-option value="none">None</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-input label="Text input" labelPlacement="floating" placeholder="Name"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input label="Date & Time" [disabled]="true" placeholder="placeholder"></ion-input>
+                </ion-item>
+                <ion-item-divider>
+                  Return
+                </ion-item-divider>
+                <ion-item>
+                  <ion-select label="Type">
+                    <ion-select-option value="flight">Flight</ion-select-option>
+                    <ion-select-option value="car">Car</ion-select-option>
+                    <ion-select-option value="train">Train</ion-select-option>
+                    <ion-select-option value="other">Other</ion-select-option>
+                    <ion-select-option value="none">None</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-input label="Details" labelPlacement="floating" placeholder="Enter Information, ex. Flight Number"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input label="Date & Time" [disabled]="true" placeholder="placeholder"></ion-input>
+                </ion-item>
+                <br/>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      
+                    </ion-col>
+                    <ion-col>
+                      <ion-button expand="block" shape="round" fill="outline">
+                        Save
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+          <ion-accordion-group>
+            <ion-accordion value="first">
+              <ion-item slot="header" color="light">
+                <ion-label>Expenses</ion-label>
+                <ion-icon slot="end" name="alert-circle" color="warning"></ion-icon>
+                <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
+              </ion-item>
+              <div class="ion-padding" slot="content">
+                <ion-list>
+                  <ion-item button id="ticket">
+                    Item
+                    <ion-note slot="end">
+                      Cost
+                    </ion-note>
+                    <ion-button fill="clear" slot="end">
+                      <ion-icon  name="ellipse-outline" color="medium"></ion-icon>
+                    <ion-icon name="checkmark-circle" color="success"></ion-icon>
+                    </ion-button>
+                  </ion-item>
+                  <!--  -->
+                </ion-list>
+                <ion-button fill="clear">
+                  New Expense
+                </ion-button>
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
         </ion-list>
       </div>
     </ion-accordion>
     <ion-accordion value="second" *ngIf="(data.id==1)||(data.id==3)">
       <ion-item slot="header" color="light">
         <ion-label>Announcements</ion-label>
-        <ion-note slot="end">3 New</ion-note>
+        <ion-note slot="end">Count</ion-note>
       </ion-item>
       <div class="ion-padding" slot="content">
         <ion-list>
           <ion-item>
-            Announcement 1
-          </ion-item>
-          <ion-item>
-            Announcement 2
-          </ion-item>
-          <ion-item lines="none">
-            Announcement 3
+            Announcement
           </ion-item>
         </ion-list>
+        <ion-button fill="clear">
+          Add New
+        </ion-button>
       </div>
     </ion-accordion>
     <ion-accordion value="third" [disabled]="(data.id==4)||(data.id==5)">
       <ion-item slot="header" color="light">
         <ion-label>Guests</ion-label>
-        <ion-note slot="end">4 Confirmed</ion-note>
+        <ion-note slot="end">Count</ion-note>
       </ion-item>
       <div class="ion-padding" slot="content">
         <ion-list>
@@ -137,157 +267,41 @@
             <ion-avatar aria-hidden="true" slot="start">
               <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
             </ion-avatar>
-            <ion-label>Huey Freeman</ion-label>
-          </ion-item>
-          <ion-item>  
-            <ion-avatar aria-hidden="true" slot="start">
-              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-            <ion-label>Mickey Mouse</ion-label>
-          </ion-item>
-          <ion-item>  
-            <ion-avatar aria-hidden="true" slot="start">
-              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-            <ion-label>Kermit the Frog</ion-label>
-          </ion-item>
-          <ion-item >  
-            <ion-avatar aria-hidden="true" slot="start">
-              <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-            <ion-label>Bugs Bunny</ion-label>
+            <ion-label>Guest Name</ion-label>
           </ion-item>
         </ion-list>
+        <ion-button fill="clear">
+          Invite
+        </ion-button>
       </div>
     </ion-accordion>
     <ion-accordion value="forth">
       <ion-item slot="header" color="light">
         <ion-label>Itenerary</ion-label>
-        <ion-note slot="end">4 Events</ion-note>
-        <!--<ion-button fill="clear" slot="end">
-          <ion-icon slot="icon-only" name="add"></ion-icon>
-        </ion-button>-->
+        <ion-note slot="end">Count</ion-note>
       </ion-item>
       <div class="ion-padding" slot="content">
         <ion-list>
           <ion-item-divider>
-            Day 1
+            Day
           </ion-item-divider>
           <ion-item button (click)="goToPage('event/1')">
             <ion-note slot="start">
               Time
             </ion-note>
             <ion-label>
-              Event 1 
+              Event Name 
             </ion-label>
-            <ion-note slot="end" color="danger">
-              Declined
-            </ion-note>
-          </ion-item>
-          <ion-item button lines="none" (click)="goToPage('event/1')">
-            <ion-note slot="start">
-              Time
-            </ion-note>
-            <ion-label>
-              Event 2 
-            </ion-label>
-            <ion-note slot="end" color="success">
-              Confirmed
-            </ion-note>
-          </ion-item>
-          <ion-item-divider>
-            Day 2
-          </ion-item-divider>
-          <ion-item button (click)="goToPage('event/1')">
-            <ion-note slot="start">
-              Time
-            </ion-note>
-            <ion-label>
-              Event 3 
-            </ion-label>
-            <ion-note slot="end" color="warning">
-              Tentative
-            </ion-note>
-          </ion-item>
-          <ion-item button lines="none" (click)="goToPage('event/1')">
-            <ion-note slot="start">
-              Time
-            </ion-note>
-            <ion-label>
-              Event 4 
-            </ion-label>
-            <ion-note slot="end" color="success">
-              Confirmed
-            </ion-note>
+            <ion-button slot="end" fill="clear">
+              -RSVP-
+            </ion-button>
           </ion-item>
         </ion-list>
+        <ion-button fill="clear">
+          New Suggestion
+        </ion-button>
       </div>
     </ion-accordion>
   </ion-accordion-group>
-
-  <!--<ion-item-group>
-    <ion-item-divider>
-      <ion-label> Guests</ion-label>
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-item-divider>
-
-    <ion-item button (click)="goToPage('account')">
-      <ion-avatar aria-hidden="true" slot="start">
-        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>Me: Mickey Mouse</ion-label>
-      <ion-button color="success" fill="outline" shape="round" (click)="action('respond yes'); $event.stopPropagation()">
-        Yes
-      </ion-button>
-      <ion-button color="warning"  shape="round" (click)="action('respond tentative'); $event.stopPropagation()">
-        Tentative
-      </ion-button>
-      <ion-button color="danger" fill="outline" shape="round" (click)="action('respond no'); $event.stopPropagation()">
-        No
-      </ion-button>
-    </ion-item>
-    <ion-item button (click)="goToPage('account')">
-      <ion-avatar aria-hidden="true" slot="start">
-        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>Kermit "the" Frog</ion-label>
-      <ion-label color="success">confirmed</ion-label>
-    </ion-item>
-    <ion-item button (click)="goToPage('account')">
-      <ion-avatar aria-hidden="true" slot="start">
-        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>Bugs Bunny</ion-label>
-      <ion-label color="warning">tentative</ion-label>
-    </ion-item>
-    <ion-item button lines="none" (click)="goToPage('account')">
-      <ion-avatar aria-hidden="true" slot="start">
-        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
-      <ion-label>Daffy Duck</ion-label>
-      <ion-label color="danger">declined</ion-label>
-    </ion-item>
-  </ion-item-group>-->
-
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button>
-        <ion-icon name="megaphone"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button (click)="goToPage('editEvent')">
-        <ion-icon name="calendar"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button (click)="goToPage('search/1')">
-        <ion-icon name="person-add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
   
-  
-
 </ion-content>

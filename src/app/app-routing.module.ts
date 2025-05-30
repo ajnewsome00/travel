@@ -11,6 +11,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
+  {
+    path: 'editAccount',
+    loadChildren: () => import('./edit-account/edit-account.module').then(m => m.EditAccountPageModule)
+  },
   
 ];
 @NgModule({

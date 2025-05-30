@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-account',
@@ -9,13 +10,18 @@ import { Location } from '@angular/common';
 })
 export class EditAccountPage implements OnInit {
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private router: Router) { }
 
   ngOnInit() {
   }
 
   goBack(){
     this.location.back();
+  }
+
+  goToTabs() {
+    this.router.navigate(['/tabs']);
+    //console.log(" Button Pushed");
   }
 
 }

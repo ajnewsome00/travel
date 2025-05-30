@@ -28,26 +28,23 @@
     </ion-grid>
     <ion-card-header>
       <ion-card-title>Name</ion-card-title>
-      <ion-note>Established</ion-note>
+      <ion-card-subtitle>Established</ion-card-subtitle>
     </ion-card-header>
   
     <ion-card-content>
       Here's a small text description for the card content. Nothing more, nothing less.
-      <ion-list-header class="ion-no-padding">
-        <ion-label>
-          Organizers
-        </ion-label>
-      </ion-list-header>
-      <ion-chip [outline]="true" slot="end">
-        <ion-avatar>
-          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
-        <ion-label>Huey Freeman</ion-label>
-      </ion-chip>
+      <ion-item class="ion-no-padding" lines="full"> 
+        Organizer
+        <ion-chip [outline]="true" slot="end">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>Organizer Name</ion-label>
+        </ion-chip>
+      </ion-item>
     </ion-card-content>
 
     <ion-grid>
-      
       <ion-row class="ion-text-center ion-align-items-center">
         <ion-col> 
           1 
